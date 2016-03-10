@@ -3,7 +3,7 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE', which is part of this source code package.
  */
- package nsga2;
+package nsga2;
 
 import java.util.ArrayList;
 import java.util.Collections;
