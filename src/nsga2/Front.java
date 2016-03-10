@@ -1,4 +1,9 @@
-package nsga2;
+/*
+ * Copyright (c) 2016 Barnaby Isaac Yves Taylor <github.com/barns>
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ */
+ package nsga2;
 
 import java.util.ArrayList;
 import java.util.Collections;

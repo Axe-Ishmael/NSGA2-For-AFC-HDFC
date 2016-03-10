@@ -1,4 +1,9 @@
-package nsga2;
+/*
+ * Copyright (c) 2016 Barnaby Isaac Yves Taylor <github.com/barns>
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ */
+ package nsga2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +13,7 @@ public class Population {
 
 	private List<Individual> population;
 	private List<ObjectiveFunction> objectiveFunctions;
-	
+
 	private int maxBitstringLength;
 
 	// Min and max optimization values used to calculate crowding distance
@@ -21,7 +26,7 @@ public class Population {
 		this.population = new ArrayList<Individual>();
 		this.objectiveFunctions = new ArrayList<ObjectiveFunction>();
 		this.maxBitstringLength = maxBitstringLength;
-		
+
 		this.leastZeros = 0;
 		this.mostZeros = maxBitstringLength;
 		this.leastOnes = 0;
@@ -46,7 +51,7 @@ public class Population {
 	public Individual get(int i) {
 		return this.population.get(i);
 	}
-	
+
 	public List<Individual> getAll() {
 		return this.population;
 	}
@@ -58,7 +63,7 @@ public class Population {
 	public void addAll(List<Individual> individuals) {
 		this.population.addAll(individuals);
 	}
-	
+
 	public Individual remove(int i) {
 		return this.population.remove(i);
 	}

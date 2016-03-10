@@ -1,4 +1,9 @@
-package nsga2;
+/*
+ * Copyright (c) 2016 Barnaby Isaac Yves Taylor <github.com/barns>
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ */
+ package nsga2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +12,7 @@ public class Individual {
 
 	// The actual bitstring of the individual
 	private String bitString;
-	
+
 	// The factors to be optimised
 	private int leadingOnes;
 	private int trailingZeros;
@@ -28,11 +33,11 @@ public class Individual {
 		this.dominatedIndividuals = new ArrayList<Individual>();
 		this.dominating = 0;
 		this.bitString = "";
-		
+
 		for (int i = 0; i < zeros; i++) {
 			this.bitString += '0';
 		}
-		
+
 		for (int i = 0; i < ones; i++) {
 			this.bitString += '1';
 		}
@@ -42,19 +47,19 @@ public class Individual {
 	public String getBitstring() {
 		return this.bitString;
 	}
-	
+
 	public void setLeadingOnes(int ones) {
 		this.leadingOnes = ones;
 	}
-	
+
 	public int getLeadingOnes() {
 		return this.leadingOnes;
 	}
-	
+
 	public void setTrailingZeros(int zeros) {
 		this.trailingZeros = zeros;
 	}
-	
+
 	public int getTrailingZeros() {
 		return this.trailingZeros;
 	}
@@ -121,17 +126,17 @@ public class Individual {
 	public void setCrowdingDistance(double d) {
 		this.crowdingDistance = d;
 	}
-	
+
 	public boolean isFeasible(int maxBitstringLength) {
 		int changeoverIndex;
-		
+
 		if ((changeoverIndex = this.bitString.indexOf('1')) >= 0) {
 			if (this.bitString.indexOf('0', changeoverIndex) >= 0) {
 				// Some ones precede some zeros
 				return false;
 			}
 		}
-		
+
 		return (this.bitString.length() <= maxBitstringLength);
 	}
 }

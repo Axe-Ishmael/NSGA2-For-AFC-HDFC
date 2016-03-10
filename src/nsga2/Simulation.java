@@ -1,4 +1,9 @@
-package nsga2;
+/*
+ * Copyright (c) 2016 Barnaby Isaac Yves Taylor <github.com/barns>
+ * This file is subject to the terms and conditions defined in
+ * file 'LICENSE', which is part of this source code package.
+ */
+ package nsga2;
 
 public class Simulation {
 
@@ -21,7 +26,7 @@ public class Simulation {
 			initialPopulation = generation.createOffspring(crossoverProbability,
 					mutationProbability);
 		}
-		
+
 		generation.nonDominatedSort();
 		generation.getPopulation().getAll().forEach((individual) -> {
 			System.out.println(individual.getLeadingOnes() + "," + individual.getTrailingZeros());
