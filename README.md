@@ -1,7 +1,7 @@
 # Java Implementation of NSGA-II
 
 ## Introduction
-This is an implementation of NSGA-II, written in Java, based upon the description contained in the book *Multi-Objective Optimisation using Evolutionary Algorithms* by Kalyanmoy Deb, using the "Leading Ones, Trailing Zeros (LOTZ) problem.
+This is an implementation of NSGA-II, written in Java, based upon the description contained in the book *Multi-Objective Optimisation using Evolutionary Algorithms* by Kalyanmoy Deb. It currently optimises the "Leading Ones, Trailing Zeros" (LOTZ) problem.
 
 Java isn't the most efficient language, so this algorithm won't run as quickly as in, say, C++, but some find it easier to understand, and it's useful for some applications.
 
