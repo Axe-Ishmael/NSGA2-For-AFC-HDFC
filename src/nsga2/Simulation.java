@@ -7,13 +7,13 @@ package nsga2;
 
 public class Simulation {
 
-	int populationSize = 5000; // Population size for each generation
-	int generations = 10; // Number of generations to simulate for
+	int populationSize = 100; // Population size for each generation 每代的population大小
+	int generations = 10; // Number of generations to simulate for  代数
 
-	private double crossoverProbability = 0.5;
-	private double mutationProbability = 0.1;
+	private double crossoverProbability = 0.5; //交叉率
+	private double mutationProbability = 0.1;	//变异率
 
-	int maxBitstringLength = 50; // Maximum allowable bitstring length
+	int maxBitstringLength = 10; // Maximum allowable bitstring length 最大允许的位串长度
 
 	public void start() {
 		Generation generation = null;

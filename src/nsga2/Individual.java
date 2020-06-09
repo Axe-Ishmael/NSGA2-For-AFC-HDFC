@@ -3,6 +3,9 @@
  * This file is subject to the terms and conditions defined in
  * file 'LICENSE', which is part of this source code package.
  */
+
+//定义每个个体-- Defination of every Individual
+//改写后得Individua类应该包含一个EDC数组
 package nsga2;
 
 import java.util.ArrayList;
@@ -13,20 +16,20 @@ public class Individual {
 	// The actual bitstring of the individual
 	private String bitString;
 
-	// The factors to be optimised
+	// The factors to be optimised --被优化的参数
 	private int leadingOnes;
 	private int trailingZeros;
 
-	// List of individuals being dominated by this individual
+	// List of individuals being dominated by this individual --被该individual支配的individuals组成的List
 	private List<Individual> dominatedIndividuals;
 
-	// The number of individuals dominating this one
+	// The number of individuals dominating this one --支配当前该individual的individual数量
 	private int dominating;
 
-	// The rank of the individual
+	// The rank of the individual --individual的排序
 	private int rank;
 
-	// Crowding distance of the individual
+	// Crowding distance of the individual --计算Crowding distance
 	private double crowdingDistance;
 
 	Individual(int zeros, int ones) {
@@ -64,18 +67,17 @@ public class Individual {
 		return this.trailingZeros;
 	}
 
-	// Adds a new individual to the list of individuals being dominated by this
-	// one
+	//    --向被该individual支配的individuals 组成的List中添加一个新的individual
 	public void addDominatedIndividual(Individual q) {
 		this.dominatedIndividuals.add(q);
 	}
-
+	//返回被该individual支配的individuals组成的List
 	public List<Individual> getDominatedIndividuals() {
 		return this.dominatedIndividuals;
 	}
 
-	// Returns true if p (this individual) dominates q (the individual passed
-	// as an argument), else returns false
+
+	//如果当前individual支配作为参数被传入的individual q,则返回true
 	public boolean dominates(Individual q) {
 		int pZeros = this.getTrailingZeros();
 		int qZeros = q.getTrailingZeros();
@@ -92,41 +94,43 @@ public class Individual {
 		return true;
 	}
 
-	// Adds one to the number of individuals dominating this one
+
+	//-- 支配该individual的individuals数量+1
 	public void incrementDominating() {
 		this.dominating++;
 	}
 
-	// Removes one from the number of individuals dominating this one
+	// 支配该individual的individuals数量-1
 	public void decrementDominating() {
 		this.dominating--;
 	}
 
-	// Returns the number of individuals dominating this one
+	// 返回支配该individual的individuals的数量
 	public int getDominating() {
 		return this.dominating;
 	}
 
-	// Returns the rank of this individual
+	// 返回该individual的rank
 	public int getRank() {
 		return this.rank;
 	}
 
-	// Sets the rank of this individual
+	// 设置该individual的rank rank代表该individual属于第几层front
 	public void setRank(int r) {
 		this.rank = r;
 	}
 
-	// Returns the crowding distance of the individual
+	// 返回 the crowding distance of the individual
 	public double getCrowdingDistance() {
 		return this.crowdingDistance;
 	}
 
-	// Sets the crowding distance of the individual
+	// 设置 the crowding distance of the individual
 	public void setCrowdingDistance(double d) {
 		this.crowdingDistance = d;
 	}
 
+	//判断是否是可行 (<maxBitstringLength)
 	public boolean isFeasible(int maxBitstringLength) {
 		int changeoverIndex;
 

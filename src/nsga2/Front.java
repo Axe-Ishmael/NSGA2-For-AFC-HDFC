@@ -12,43 +12,47 @@ import java.util.List;
 
 public class Front {
 
-	// List to store all individuals in the front
+	// 存储所有在前沿中的Individual个体
 	List<Individual> front;
 
 	Front() {
 		front = new ArrayList<Individual>();
 	}
 
-	// Adds a new individual to the front
+	// 添加新的individual到前沿中
 	public void add(Individual individual) {
 		this.front.add(individual);
 	}
 
-	// Returns the number of individuals in the front
+	// 返回在Front中的individual数量
 	public int size() {
 		return this.front.size();
 	}
 
-	// Returns a list of all individuals in the front
+	// 返回整个前沿List
 	public List<Individual> getIndividuals() {
 		return this.front;
 	}
 
-	// Removes and returns the first individual in the front
+	// 返回并删除前沿中的第一个individual
 	public Individual pop() {
 		return this.front.remove(0);
 	}
 
 	// Sets the ranks of all individuals in the front
+	//为front中的每个individual设置rank
+	//将front(ith)中的个体进一步进行层次划分，将划分出的个体加入到(i+1)th frontQ中,对应的rank为i+1
 	public void setIndividualRanks(int frontCounter, Front frontQ) {
 		front.forEach((p) -> {
-			p.getDominatedIndividuals().forEach((q) -> {
+			p.getDominatedIndividuals().forEach((q) -> {//对被p支配的所有个体进行遍历
 				// Decrement the domination count for individual q
-					q.decrementDominating();
+					q.decrementDominating();//??? 为何要减少一个支配q的individual的数量
 
 					// If q is not dominated by any individuals then it belongs
 					// to
 					// front Q
+					//如果支配q的数量为0，即p不被任何个体支配
+					//则将q加入到front Q中
 					if (q.getDominating() == 0) {
 						q.setRank(frontCounter + 1);
 						frontQ.add(q);
@@ -60,6 +64,9 @@ public class Front {
 	// Assigns the crowding distance of each individual in the front which is
 	// gives the euclidian distance between each individual based on their m
 	// objectives in m dimensional space (for this problem m = 2)
+	/*
+	为前沿中每个个体分配crowding distance，crowding distance是基于欧几里得几何距离
+	 */
 	public void assignCrowdingDistance(Population population) {
 
 		population.getObjectiveFunctions().forEach((objectiveFunction) -> {
@@ -73,26 +80,30 @@ public class Front {
 			});
 
 			// Assign a large distance to the boundary solutions
+			//给front头尾的individual设置一个较大的distance
 			front.get(0).setCrowdingDistance(Double.MAX_VALUE);
 			front.get(front.size() - 1).setCrowdingDistance(Double.MAX_VALUE);
 
 			for (int k = 1; k < front.size() - 1; k++) {
-				double crowdingDistance = front.get(k).getCrowdingDistance();
-				double nextIndividualValue = objectiveFunction
+				double crowdingDistance = front.get(k).getCrowdingDistance();//获得当前第k个individual的CrowdingDistance
+
+				double nextIndividualValue = objectiveFunction//获得k+1个individual的指标值
 						.getObjectiveValue(front.get(k + 1));
-				double lastIndividualValue = objectiveFunction
+				double lastIndividualValue = objectiveFunction//获得k-1个individual的指标值
 						.getObjectiveValue(front.get(k - 1));
-				double valueDifference = objectiveFunction
+
+				double valueDifference = objectiveFunction //population)中的最大最小值之差
 						.getMostValue(population)
 						- objectiveFunction.getLeastValue(population);
 
-				crowdingDistance += (nextIndividualValue - lastIndividualValue)
+				crowdingDistance += (nextIndividualValue - lastIndividualValue)//计算crowdingDistance
 						/ valueDifference;
-				front.get(k).setCrowdingDistance(crowdingDistance);
+				front.get(k).setCrowdingDistance(crowdingDistance);//设置crowdingDistance
 			}
 		});
 	}
 
+	//将front中的individuals按降序排列
 	public void sortByCrowdingDistance() {
 		// Sorts the front in descending order of crowding distance
 		Collections.sort(front, new Comparator<Individual>() {
