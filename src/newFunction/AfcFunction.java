@@ -4,7 +4,7 @@ package newFunction;
 import nsga2.Individual;
 import nsga2.Population;
 
-public class AfcFunction implements paraFunction {
+public class AfcFunction implements ObjectiveFunction {
 
     @Override
     public double calculateObjective(Individual individual) {

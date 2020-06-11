@@ -26,7 +26,7 @@ public class Individual {
 	// The number of individuals dominating this one --支配当前该individual的individual数量
 	private int dominating;
 
-	// The rank of the individual --individual的排序
+	// The rank of the individual --individual属于的front层数 = rank
 	private int rank;
 
 	// Crowding distance of the individual --计算Crowding distance

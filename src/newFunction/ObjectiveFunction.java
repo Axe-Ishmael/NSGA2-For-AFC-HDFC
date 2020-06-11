@@ -3,7 +3,7 @@ package newFunction;
 import nsga2.Individual;
 import nsga2.Population;
 
-public interface paraFunction {
+public interface ObjectiveFunction {
     // Returns the objective for this function (e.g. zeros, ones), using the
     // given individual's decision variables
     public double calculateObjective(Individual individual);

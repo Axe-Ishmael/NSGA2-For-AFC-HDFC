@@ -66,6 +66,7 @@ public class Front {
 	// objectives in m dimensional space (for this problem m = 2)
 	/*
 	为前沿中每个个体分配crowding distance，crowding distance是基于欧几里得几何距离
+	对每一个指标计算公式都要进行判断
 	 */
 	public void assignCrowdingDistance(Population population) {
 
