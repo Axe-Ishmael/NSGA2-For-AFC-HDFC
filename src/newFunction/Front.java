@@ -122,5 +122,17 @@ public class Front {
 
     }
 
+    //将front中的individuals按降序排列
+    public void sortByCrowdingDistance() {
+        // Sorts the front in descending order of crowding distance
+        Collections.sort(front, new Comparator<Individual>() {
+            @Override
+            public int compare(Individual p, Individual q) {
+                return Double.compare(q.getCrowdingDistance(),
+                        p.getCrowdingDistance());
+            }
+        });
+    }
+
 
 }

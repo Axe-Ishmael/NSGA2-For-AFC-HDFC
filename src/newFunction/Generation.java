@@ -12,4 +12,6 @@ public class Generation {
     private List<Individual> matingPool;//交配池
 
     private List<Front> fronts;//前沿List
+
+
 }
