@@ -34,8 +34,8 @@ public class Individual {
             this.edcList.add(new EDC(random.nextDouble()));
         }
 
-        AFC = Functions.Calculate_std(this.edcList);
-        HDFT = Functions.HDFT(this.edcList);
+        AFC = Functions.Average_Coverage(this.edcList);
+        HDFT = Functions.Calculate_std(this.edcList);
 
 
     }

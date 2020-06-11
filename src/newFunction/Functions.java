@@ -114,7 +114,7 @@ public class Functions {
 		{
 			sum += edc.get(i).getError_Coverage();
 		}
-		return -sum / (edc.size());
+		return sum / (edc.size());
 	}
 
 	//求解异构度
