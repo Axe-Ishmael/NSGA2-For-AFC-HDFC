@@ -141,5 +141,9 @@ public class Individual {
         return (this.getAFC() <=1 && this.getHDFT()<=1 );
     }
 
+    public boolean isFeasible(Individual individual){
+        return (individual.getAFC() <=1 && individual.getHDFT()<=1 );
+    }
+
 
 }
