@@ -137,7 +137,7 @@ public class Generation {
 				chromosome1 = parent1.getBitstring();
 				chromosome2 = parent2.getBitstring();
 
-				offspring = crossover(chromosome1, chromosome2);
+				offspring = crossover(chromosome1, chromosome2);//返回用chromosome1和chromosome2杂交产生的两个string变量
 
 				parent1 = newIndividualFromChromosome(mutateChromosome(offspring[0], mutationProbability));
 
@@ -208,9 +208,9 @@ public class Generation {
 		for (int i = 0; i < chromosome.length(); i++) {
 			//charAt(int index) 方法用于返回指定索引处的字符。索引范围为从 0 到 length() - 1。
 			if (chromosome.charAt(i) == '1') {
-				decisionVariable1++;
+				decisionVariable1++;//统计chromosome中"1"的个数
 			} else if (chromosome.charAt(i) == '2') {
-				decisionVariable2++;
+				decisionVariable2++;//统计chromosome中"2"的个数
 			}
 		}
 

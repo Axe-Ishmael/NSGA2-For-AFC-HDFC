@@ -143,10 +143,10 @@ public class Generation {
             Individual parent1 = matingPool.get(i);
             Individual parent2;
 
-            double AFC1;
-            double AFC2;
-            double HDFT1;
-            double HDFT2;
+            double[] cross_error_Coverage = new double[2];
+            double error_Coverage1;
+            double error_Coverage2;
+
 
             if (Math.random() < crossoverProbability) {
                 int j;
@@ -156,15 +156,32 @@ public class Generation {
                     parent2 = matingPool.get(j);
                 } while (i == j);
 
-                AFC1 = parent1.getAFC();
-                AFC2 = parent2.getAFC();
-                HDFT1 = parent1.getHDFT();
-                HDFT2 = parent2.getHDFT();
 
 
-                parent1 = new Individual(EDCLength);
+                int m ,k;
+                do{
+                    m = rand.nextInt(parent1.getEdcList().size()/2);//确定进行EDC值突变的位置
+                    k = rand.nextInt(parent1.getEdcList().size()/2);//确定进行EDC值突变的位置
+                }while (m == k);
 
-                parent2 = new Individual(EDCLength);
+
+
+                error_Coverage1 = parent1.getEdcList().get(m).getError_Coverage();
+                error_Coverage2 = parent2.getEdcList().get(m).getError_Coverage();
+                cross_error_Coverage[0] = (error_Coverage1*mutationProbability)+(1-mutationProbability)*error_Coverage2;
+
+                error_Coverage1 = parent1.getEdcList().get(k).getError_Coverage();
+                error_Coverage2 = parent2.getEdcList().get(k).getError_Coverage();
+                cross_error_Coverage[1] = (error_Coverage1*mutationProbability)+(1-mutationProbability)*error_Coverage2;
+
+                List<EDC> edcList1 = parent1.setEDCList(m,cross_error_Coverage[0]);
+                List<EDC> edcList2 = parent2.setEDCList(k,cross_error_Coverage[1]);
+
+
+                parent1 = new Individual(edcList1);
+                parent2 = new Individual(edcList2);
+
+
 
                 if (!parent1.isFeasible(parent1)) {
                     matingPool.remove(i);
@@ -175,6 +192,13 @@ public class Generation {
                 }
             }
         }
+    }
+
+    public List<Front> getFronts(){
+        return this.fronts;
+    }
+    public int getFrontListSize(){
+        return fronts.size();
     }
 
 

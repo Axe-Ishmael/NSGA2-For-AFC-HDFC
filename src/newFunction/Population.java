@@ -27,10 +27,11 @@ public class Population {
         this.PopulationSize = PopulationSize;
         this.EDCLength = EDCLength;
 
-        this.leastAFC = 0;
-        this.leastHDFT = 0;
-        this.maxAFC = 1.0;
-        this.maxHDFT = 1.0;
+
+        this.leastAFC = 1.0;
+        this.leastHDFT = 1.0;
+        this.maxAFC = 0;
+        this.maxHDFT = 0;
 
         objectiveFunctions.add(new AfcFunction());
         objectiveFunctions.add(new HdfcFuntion());

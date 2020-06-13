@@ -4,14 +4,14 @@
  * file 'LICENSE', which is part of this source code package.
  */
 //package nsga2;
-////
-////public class NSGA2 {
-////
-////	public static void main(String [] args) {
-////
-////		Simulation simulation = new Simulation();
-////
-////		simulation.start();
-////	}
-////
-////}
+//
+//public class NSGA2 {
+//
+//	public static void main(String [] args) {
+//
+//		Simulation simulation = new Simulation();
+//
+//		simulation.start();
+//	}
+//
+//}

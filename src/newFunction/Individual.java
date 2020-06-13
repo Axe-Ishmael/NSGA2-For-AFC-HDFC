@@ -146,4 +146,35 @@ public class Individual {
     }
 
 
+    //替换EDCList中第index个EDC对象
+    public List<EDC> setEDCList(int index, double Error_Coverage){
+
+        if (index > this.edcList.size()){
+            return this.edcList;
+        }
+
+        EDC edc = new EDC(Error_Coverage);
+        edcList.set(index,edc);
+        return edcList;
+
+    }
+
+    //重新计算AFC和HDFT的值
+    public void reCalculatePara(){
+
+        AFC = Functions.Average_Coverage(this.edcList);
+        HDFT = Functions.Calculate_std(this.edcList);
+    }
+
+    public Individual(List<EDC>edcList){
+        this.edcList = edcList;
+        this.dominatedIndividuals = new ArrayList<Individual>();
+
+        AFC = Functions.Average_Coverage(this.edcList);
+        HDFT = Functions.Calculate_std(this.edcList);
+
+    }
+
+
+
 }

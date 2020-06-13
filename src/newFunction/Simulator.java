@@ -2,13 +2,13 @@ package newFunction;
 
 public class Simulator {
 
-    int populationSize = 10; // Population size for each generation 每代的population大小
-    int generations = 3; // Number of generations to simulate for  代数
+    int populationSize = 30; // Population size for each generation 每代的population大小
+    int generations = 4; // Number of generations to simulate for  代数
 
-    private double crossoverProbability = 0.8; //交叉率
-    private double mutationProbability = 0.8;	//变异率
+    private double crossoverProbability = 0.2; //交叉率
+    private double mutationProbability = 0.1;	//变异率
 
-    private int EDCLength = 8;//EDC数组长度
+    private int EDCLength = 10;//EDC数组长度
 
     public void start(){
         Generation generation = null;
@@ -22,14 +22,24 @@ public class Simulator {
                     mutationProbability);
         }
 
-        generation.nonDominatedSort();
-        generation.getPopulation().getAll().forEach((individual) -> {
+//        generation.nonDominatedSort();
+
+        int frontListSize = generation.getFrontListSize();
+        Front front = generation.getFronts().get(frontListSize-1);
+        if (front.getIndividuals().size() == 0){
+            frontListSize--;
+            front = generation.getFronts().get(frontListSize-1);
+        }
+
+        front.getIndividuals().forEach(individual -> {
             System.out.println(individual.getAFC() + "," + individual.getHDFT());
         });
 
-//        for (int i = 0;i<generation.getPopulation().getAll().size();i++){
-//            System.out.println(generation.getPopulation().getAll().get(i).getAFC()+","+generation.getPopulation().getAll().get(i).getHDFT());
-//        }
+
+//        generation.getPopulation().getAll().forEach((individual) -> {
+//            System.out.println(individual.getAFC() + "," + individual.getHDFT());
+//        });
+
 
 
     }
