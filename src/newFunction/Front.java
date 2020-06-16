@@ -66,60 +66,107 @@ public class Front {
 	为前沿中每个个体分配crowding distance，crowding distance是基于欧几里得几何距离
 	对每一个指标计算公式都要进行判断
 	 */
+//    public void assignCrowdingDistance(Population population) {
+//
+//        Collections.sort(this.front, new Comparator<Individual>() {
+//            @Override
+//            public int compare(Individual individual, Individual t1) {
+//                /**
+//                 　* 升序排的话就是第一个参数.compareTo(第二个参数);
+//                 　* 降序排的话就是第二个参数.compareTo(第一个参数);
+//                 */
+//                return Double.compare(individual.getAFC(),t1.getAFC());
+//            }
+//        });
+//
+//        // Assign a large distance to the boundary solutions
+//        //给front头尾的individual设置一个较大的distance
+//        front.get(0).setCrowdingDistance(Double.MAX_VALUE);
+//        front.get(front.size() - 1).setCrowdingDistance(Double.MAX_VALUE);
+//
+//        for (int k = 1; k < front.size() - 1; k++) {
+//            double crowdingDistance = front.get(k).getCrowdingDistance();//获得当前第k个individual的CrowdingDistance
+//
+//            double nextIndividualValue = front.get(k + 1).getAFC();
+//            double lastIndividualValue = front.get(k - 1).getAFC();
+//
+//            double valueDifference = population.getMaxAFC() //population)中的最大最小值之差
+//                    - population.getLeastAFC();
+//
+//            crowdingDistance += (nextIndividualValue - lastIndividualValue)//计算crowdingDistance
+//                    / valueDifference;
+//            front.get(k).setCrowdingDistance(crowdingDistance);//设置crowdingDistance
+//        }
+//
+//        Collections.sort(this.front, new Comparator<Individual>() {
+//            @Override
+//            public int compare(Individual individual, Individual t1) {
+//                return Double.compare(individual.getHDFC(),t1.getHDFC());
+//            }
+//        });
+//
+//        // Assign a large distance to the boundary solutions
+//        //给front头尾的individual设置一个较大的distance
+//        front.get(0).setCrowdingDistance(Double.MAX_VALUE);
+//        front.get(front.size() - 1).setCrowdingDistance(Double.MAX_VALUE);
+//
+//        for (int k = 1; k < front.size() - 1; k++) {
+//            double crowdingDistance = front.get(k).getCrowdingDistance();//获得当前第k个individual的CrowdingDistance
+//
+//            double nextIndividualValue = front.get(k + 1).getHDFC();
+//            double lastIndividualValue = front.get(k - 1).getHDFC();
+//
+//            double valueDifference = population.getMaxHDFC() //population)中的最大最小值之差
+//                    - population.getLeastHDFC();
+//
+//            crowdingDistance += (nextIndividualValue - lastIndividualValue)//计算crowdingDistance
+//                    / valueDifference;
+//            front.get(k).setCrowdingDistance(crowdingDistance);//设置crowdingDistance
+//        }
+//
+//    }
+
+    // Assigns the crowding distance of each individual in the front which is
+    // gives the euclidian distance between each individual based on their m
+    // objectives in m dimensional space (for this problem m = 2)
+	/*
+	为前沿中每个个体分配crowding distance，crowding distance是基于欧几里得几何距离
+	对每一个指标计算公式都要进行判断
+	 */
     public void assignCrowdingDistance(Population population) {
 
-        Collections.sort(this.front, new Comparator<Individual>() {
-            @Override
-            public int compare(Individual individual, Individual t1) {
-                return Double.compare(individual.getAFC(),t1.getAFC());
+        population.getObjectiveFunctions().forEach((objectiveFunction) -> {
+            Collections.sort(this.front, new Comparator<Individual>() {
+                @Override
+                public int compare(Individual i, Individual j) {
+                    return Double.compare(
+                            objectiveFunction.getObjectiveValue(i),
+                            objectiveFunction.getObjectiveValue(j));
+                }
+            });
+
+            // Assign a large distance to the boundary solutions
+            //给front头尾的individual设置一个较大的distance
+            front.get(0).setCrowdingDistance(Double.MAX_VALUE);
+            front.get(front.size() - 1).setCrowdingDistance(Double.MAX_VALUE);
+
+            for (int k = 1; k < front.size() - 1; k++) {
+                double crowdingDistance = front.get(k).getCrowdingDistance();//获得当前第k个individual的CrowdingDistance
+
+                double nextIndividualValue = objectiveFunction//获得k+1个individual的指标值
+                        .getObjectiveValue(front.get(k + 1));
+                double lastIndividualValue = objectiveFunction//获得k-1个individual的指标值
+                        .getObjectiveValue(front.get(k - 1));
+
+                double valueDifference = objectiveFunction //population)中的最大最小值之差
+                        .getMostValue(population)
+                        - objectiveFunction.getLeastValue(population);
+
+                crowdingDistance += (nextIndividualValue - lastIndividualValue)//计算crowdingDistance
+                        / valueDifference;
+                front.get(k).setCrowdingDistance(crowdingDistance);//设置crowdingDistance
             }
         });
-
-        // Assign a large distance to the boundary solutions
-        //给front头尾的individual设置一个较大的distance
-        front.get(0).setCrowdingDistance(Double.MAX_VALUE);
-        front.get(front.size() - 1).setCrowdingDistance(Double.MAX_VALUE);
-
-        for (int k = 1; k < front.size() - 1; k++) {
-            double crowdingDistance = front.get(k).getCrowdingDistance();//获得当前第k个individual的CrowdingDistance
-
-            double nextIndividualValue = front.get(k + 1).getAFC();
-            double lastIndividualValue = front.get(k - 1).getAFC();
-
-            double valueDifference = population.getMaxAFC() //population)中的最大最小值之差
-                    - population.getLeastAFC();
-
-            crowdingDistance += (nextIndividualValue - lastIndividualValue)//计算crowdingDistance
-                    / valueDifference;
-            front.get(k).setCrowdingDistance(crowdingDistance);//设置crowdingDistance
-        }
-
-        Collections.sort(this.front, new Comparator<Individual>() {
-            @Override
-            public int compare(Individual individual, Individual t1) {
-                return Double.compare(individual.getHDFC(),t1.getHDFC());
-            }
-        });
-
-        // Assign a large distance to the boundary solutions
-        //给front头尾的individual设置一个较大的distance
-        front.get(0).setCrowdingDistance(Double.MAX_VALUE);
-        front.get(front.size() - 1).setCrowdingDistance(Double.MAX_VALUE);
-
-        for (int k = 1; k < front.size() - 1; k++) {
-            double crowdingDistance = front.get(k).getCrowdingDistance();//获得当前第k个individual的CrowdingDistance
-
-            double nextIndividualValue = front.get(k + 1).getHDFC();
-            double lastIndividualValue = front.get(k - 1).getHDFC();
-
-            double valueDifference = population.getMaxHDFC() //population)中的最大最小值之差
-                    - population.getLeastHDFC();
-
-            crowdingDistance += (nextIndividualValue - lastIndividualValue)//计算crowdingDistance
-                    / valueDifference;
-            front.get(k).setCrowdingDistance(crowdingDistance);//设置crowdingDistance
-        }
-
     }
 
     //将front中的individuals按降序排列

@@ -28,8 +28,7 @@ public class Individual {
     //--计算Crowding distance
     private double crowdingDistance;
 
-    private double timeLimit;
-    private int FPGALmit;
+
 
     public Individual(int EDCLength){
         this.edcList = new ArrayList<EDC>(EDCLength);
@@ -91,21 +90,6 @@ public class Individual {
         this.totalFPGASquare = totalFPGASquare;
     }
 
-    public double getTimeLimit() {
-        return timeLimit;
-    }
-
-    public void setTimeLimit(double timeLimit) {
-        this.timeLimit = timeLimit;
-    }
-
-    public int getFPGALmit() {
-        return FPGALmit;
-    }
-
-    public void setFPGALmit(int FPGALmit) {
-        this.FPGALmit = FPGALmit;
-    }
 
     public List<EDC> getEdcList() {
         return edcList;

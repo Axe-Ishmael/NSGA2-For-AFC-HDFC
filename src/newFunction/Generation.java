@@ -56,7 +56,7 @@ public class Generation {
         // population
         //当第i层front不为空，且在population（不是existingPopulation）中还有剩余的位置时
         while (fronts.get(frontCounter).size() > 0
-                && population.size() < populationSize) {
+                && population.getAll().size() < populationSize) {
             // Create front Q (the (i+1)th front) and add to fronts list
             //创建front Q(第i+1层front)并加入fronts list
             Front front = fronts.get(frontCounter);
@@ -64,7 +64,7 @@ public class Generation {
 
             //将front(ith)中的个体进一步进行层次划分，将划分出的个体加入到(i+1)th frontQ中,对应的rank为i+1
             front.setIndividualRanks(frontCounter, fronts.get(frontCounter + 1));
-            if (population.size() + front.size() <= populationSize) {
+            if (population.getAll().size() + front.size() <= populationSize) {
                 population.addAll(front.getIndividuals());
             } else {
                 front.assignCrowdingDistance(existingPopulation);
@@ -96,7 +96,7 @@ public class Generation {
     private void spawnMatingPool() {
 
         matingPool = new ArrayList<Individual>();
-        int populationSize = existingPopulation.size();
+        int populationSize = existingPopulation.getAll().size();
 
         for (int i = 0; i < populationSize; i++) {
             Individual candidate = existingPopulation.get(i);
