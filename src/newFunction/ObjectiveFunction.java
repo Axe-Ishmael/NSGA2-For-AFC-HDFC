@@ -1,7 +1,7 @@
 package newFunction;
 
-import nsga2.Individual;
-import nsga2.Population;
+
+import java.util.List;
 
 public interface ObjectiveFunction {
     // Returns the objective for this function (e.g. zeros, ones), using the

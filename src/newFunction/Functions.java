@@ -107,7 +107,7 @@ public class Functions {
 	}
 
 	//求解平均错误覆盖率
-	public static double Average_Coverage( List<EDC> edc)
+	public static double Average_Coverage(List<EDC> edc)
 	{
 		double sum = 0.0;
 		for (int i = 0; i < edc.size(); i++)
@@ -130,11 +130,27 @@ public class Functions {
 		return sum;
 	}
 
-	public static double f1Test(double[] x){
-		return 0.0;
+	public static double Total_Time(List<EDC> edc){
+
+		double total_time = 0;
+		for (int i = 0 ;i<edc.size();i++){
+			total_time += edc.get(i).getEDC_Time();
+		}
+
+		return total_time;
 	}
 
-	public static double f2Test(double[] x){
-		return 0.0;
+
+	public static int Total_FPGA_SQUARE(List<EDC> edc){
+
+		int total_FPGA_Square = 0;
+		for (int i = 0;i<edc.size();i++){
+			total_FPGA_Square += edc.get(i).getFPGA_Sqare();
+		}
+
+		return total_FPGA_Square;
+
 	}
+
+
 }

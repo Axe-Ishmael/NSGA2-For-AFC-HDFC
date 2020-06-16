@@ -97,7 +97,7 @@ public class Front {
         Collections.sort(this.front, new Comparator<Individual>() {
             @Override
             public int compare(Individual individual, Individual t1) {
-                return Double.compare(individual.getHDFT(),t1.getHDFT());
+                return Double.compare(individual.getHDFC(),t1.getHDFC());
             }
         });
 
@@ -109,11 +109,11 @@ public class Front {
         for (int k = 1; k < front.size() - 1; k++) {
             double crowdingDistance = front.get(k).getCrowdingDistance();//获得当前第k个individual的CrowdingDistance
 
-            double nextIndividualValue = front.get(k + 1).getHDFT();
-            double lastIndividualValue = front.get(k - 1).getHDFT();
+            double nextIndividualValue = front.get(k + 1).getHDFC();
+            double lastIndividualValue = front.get(k - 1).getHDFC();
 
-            double valueDifference = population.getMaxHDFT() //population)中的最大最小值之差
-                    - population.getLeastHDFT();
+            double valueDifference = population.getMaxHDFC() //population)中的最大最小值之差
+                    - population.getLeastHDFC();
 
             crowdingDistance += (nextIndividualValue - lastIndividualValue)//计算crowdingDistance
                     / valueDifference;

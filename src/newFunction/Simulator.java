@@ -10,6 +10,9 @@ public class Simulator {
 
     private int EDCLength = 10;//EDC数组长度
 
+    public static double timeLimit = 450;//时间限制
+    public static int FPGALimit = 4500;//FPGA面积显示
+
     public void start(){
         Generation generation = null;
         Population initialPopulation = new Population(populationSize,EDCLength);
@@ -32,13 +35,11 @@ public class Simulator {
         }
 
         front.getIndividuals().forEach(individual -> {
-            System.out.println(individual.getAFC() + "," + individual.getHDFT());
+            System.out.println(individual.getAFC() + "," + individual.getHDFC());
         });
 
 
-//        generation.getPopulation().getAll().forEach((individual) -> {
-//            System.out.println(individual.getAFC() + "," + individual.getHDFT());
-//        });
+
 
 
 
